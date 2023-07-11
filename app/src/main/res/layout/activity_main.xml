@@ -6,13 +6,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="CST2335 Final Project"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/authors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/chewy"
+        android:text="© 2023 Avigail, Josue, SJ"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/flight"
+        android:layout_width="171dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="128dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:srcCompat="@drawable/flight" />
+
+    <ImageButton
+        android:id="@+id/exchange"
+        android:layout_width="170dp"
+        android:layout_height="171dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/flight"
+        app:srcCompat="@drawable/exchange" />
+
+    <ImageButton
+        android:id="@+id/question"
+        android:layout_width="171dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@+id/flight"
+        app:layout_constraintTop_toBottomOf="@+id/flight"
+        app:srcCompat="@drawable/question" />
+
+    <ImageButton
+        android:id="@+id/bear"
+        android:layout_width="172dp"
+        android:layout_height="168dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="@+id/exchange"
+        app:layout_constraintTop_toTopOf="@+id/question"
+        app:srcCompat="@drawable/bear" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
