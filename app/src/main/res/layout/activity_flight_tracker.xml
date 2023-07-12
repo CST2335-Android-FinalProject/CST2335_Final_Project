@@ -12,13 +12,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flightResult" />
+        app:layout_constraintTop_toBottomOf="@+id/titleAirline"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/title"
@@ -28,6 +29,7 @@
         android:text="Aviation Stack Flight Tracker"
         android:textSize="25sp"
         android:textStyle="bold"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Date: "
+        android:text="Departure Date: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -106,7 +108,87 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Flight Results:"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/titleAirline"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey"
+        android:text="Airline"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightResult" />
+
+    <TextView
+        android:id="@+id/titleFlightNumber"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Flt#"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/titleAirline"
+        app:layout_constraintStart_toEndOf="@+id/titleAirline"
+        app:layout_constraintTop_toTopOf="@+id/titleAirline" />
+
+    <TextView
+        android:id="@+id/titleArrival"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Arr#"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/titleAirline"
+        app:layout_constraintStart_toEndOf="@+id/titleFlightNumber"
+        app:layout_constraintTop_toTopOf="@+id/titleAirline" />
+
+    <TextView
+        android:id="@+id/titleStatus"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Status"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/titleAirline"
+        app:layout_constraintStart_toEndOf="@+id/titleArrival"
+        app:layout_constraintTop_toTopOf="@+id/titleAirline" />
+
+    <TextView
+        android:id="@+id/titleDepartureTime"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Dep."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/titleAirline"
+        app:layout_constraintStart_toEndOf="@+id/titleStatus"
+        app:layout_constraintTop_toTopOf="@+id/titleAirline" />
+
+    <TextView
+        android:id="@+id/titleArrivalTime"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Arr."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/titleAirline"
+        app:layout_constraintStart_toEndOf="@+id/titleDepartureTime"
+        app:layout_constraintTop_toTopOf="@+id/titleAirline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
