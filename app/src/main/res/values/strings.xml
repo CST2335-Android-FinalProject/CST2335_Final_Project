@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Final Project</string>
+    <string name="title">Aviation Stack Flight Tracker</string>
+    <string name="date">Departure Date: </string>
+    <string name="airport">Origin Airport: </string>
+    <string name="result">Flight Results: </string>
+    <string name="airline">Airline</string>
+    <string name="fNumber">Flt#</string>
+    <string name="arrAirport">Arr#</string>
+    <string name="fStatus">Status</string>
+    <string name="depTime">Dep.</string>
+    <string name="arrTime">Arr.</string>
 </resources>

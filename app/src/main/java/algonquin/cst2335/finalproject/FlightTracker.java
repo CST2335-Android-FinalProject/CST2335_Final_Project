@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -42,6 +45,11 @@ public class FlightTracker extends AppCompatActivity {
         binding = ActivityFlightTrackerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Sets history search
+        SharedPreferences prefs = getSharedPreferences("mySearch", MODE_PRIVATE);
+        binding.date.setText(prefs.getString("Date", ""));
+        binding.code.setText(prefs.getString("Airport",""));
+
         // Access the database:
         myDB = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "MyFlightDB").build();
         myDAO = myDB.frDAO(); //the only function in MessageDatabase;
@@ -61,25 +69,25 @@ public class FlightTracker extends AppCompatActivity {
             });
         }
 
-//        //register as a listener to the MutableLiveData object
-//        flightModel.selectedFlight.observe( this, selectedFlight -> {
-//
-//            if(selectedFlight != null) {
-//                //This is a Singleton object
-//                FragmentManager fMgr = getSupportFragmentManager();
-//                FragmentTransaction tx = fMgr.beginTransaction();
-//                //What to show:
-//                FlightDetailsFragment flightFragment = new FlightDetailsFragment(selectedFlight);
-//                //Where to load:
-//                // This line actually loads the fragment into the specified FrameLayout
-//                tx.replace(R.id.fragmentLocation, flightFragment);
-//                // Back to previous step
-//                tx.addToBackStack("anything here");
-//                tx.commit();
-//                // Another written codes using Builder Pattern:
-//                // getSupportFragmentManager().beginTransaction().add(R.id.fragmentLocation, chatFragment).commit();
-//            }
-//        });
+        //register as a listener to the MutableLiveData object
+        flightModel.selectedFlight.observe( this, selectedFlight -> {
+
+            if(selectedFlight != null) {
+                //This is a Singleton object
+                FragmentManager fMgr = getSupportFragmentManager();
+                FragmentTransaction tx = fMgr.beginTransaction();
+                //What to show:
+                FlightDetailsFragment flightFragment = new FlightDetailsFragment(selectedFlight);
+                //Where to load:
+                // This line actually loads the fragment into the specified FrameLayout
+                tx.replace(R.id.fragmentLocation, flightFragment);
+                // Back to previous step
+                tx.addToBackStack("anything here");
+                tx.commit();
+                // Another written codes using Builder Pattern:
+                // getSupportFragmentManager().beginTransaction().add(R.id.fragmentLocation, chatFragment).commit();
+            }
+        });
 
         binding.recycleView.setAdapter( myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
@@ -145,8 +153,15 @@ public class FlightTracker extends AppCompatActivity {
             // notify the adapter:
             myAdapter.notifyDataSetChanged(); //redraw the whole screen
 //            myAdapter.notifyItemInserted(flightResults.size()-1); //tells the Adapter which row has to be redrawn
+            Toast.makeText(this, "Your search is successful!", Toast.LENGTH_LONG).show();
 
+            // Saves the search history into Shared Preferences
+            SharedPreferences.Editor editor = getSharedPreferences("mySearch", Context.MODE_PRIVATE).edit();
+            editor.putString("Date", binding.date.getText().toString());
+            editor.putString("Airport", binding.code.getText().toString());
+            editor.apply();
         });
+
     }
 
     class MyRowHolder extends RecyclerView.ViewHolder {
@@ -162,6 +177,8 @@ public class FlightTracker extends AppCompatActivity {
 
             itemView.setOnClickListener( click ->{
                 int position = getAbsoluteAdapterPosition();
+//                FlightResult selected = flightResults.get(position);
+//                flightModel.selectedFlight.postValue(selected);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder( FlightTracker.this );
                 builder.setTitle( "Question:" )
