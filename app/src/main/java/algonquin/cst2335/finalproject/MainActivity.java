@@ -16,10 +16,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        binding.flight.setOnClickListener( clckk-> {
-//            Intent flightTracker = new Intent( MainActivity.this, FlightTracker.class);
-//            startActivity( flightTracker );
-//        });
+        binding.flight.setOnClickListener( clckk-> {
+            Intent flightTracker = new Intent( MainActivity.this, FlightTracker.class);
+            startActivity( flightTracker );
+        });
 //
 //        binding.exchange.setOnClickListener( clckk-> {
 //            Intent currencyConverter = new Intent( MainActivity.this, CurrencyConverter.class);
