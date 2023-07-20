@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <TextView
+        android:id="@+id/fraDepTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="100dp"
+        android:text="Departure Time"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fraArrTime"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="Arrival Time"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/fraDepTime"
+        app:layout_constraintStart_toStartOf="@+id/fraDepTime"
+        app:layout_constraintTop_toBottomOf="@+id/fraDepTime" />
+
+    <TextView
+        android:id="@+id/fraDepAirport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Departure Airport"
+        app:layout_constraintBottom_toBottomOf="@+id/fraDepTime"
+        app:layout_constraintStart_toEndOf="@+id/fraDepTime"
+        app:layout_constraintTop_toTopOf="@+id/fraDepTime" />
+
+    <TextView
+        android:id="@+id/fraArrAirport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrival Airport"
+        app:layout_constraintBottom_toBottomOf="@+id/fraArrTime"
+        app:layout_constraintStart_toStartOf="@+id/fraDepAirport"
+        app:layout_constraintTop_toTopOf="@+id/fraArrTime" />
+
+    <TextView
+        android:id="@+id/fraDepAirportNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Airport Number"
+        app:layout_constraintBottom_toBottomOf="@+id/fraDepAirport"
+        app:layout_constraintStart_toEndOf="@+id/fraDepAirport"
+        app:layout_constraintTop_toTopOf="@+id/fraDepAirport" />
+
+    <TextView
+        android:id="@+id/fraArrAirportNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Airport Number"
+        app:layout_constraintBottom_toBottomOf="@+id/fraArrAirport"
+        app:layout_constraintStart_toEndOf="@+id/fraArrAirport"
+        app:layout_constraintTop_toTopOf="@+id/fraArrAirport" />
+
+    <TextView
+        android:id="@+id/fraAirline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Airline"
+        app:layout_constraintBottom_toBottomOf="@+id/arrow"
+        app:layout_constraintStart_toEndOf="@+id/arrow"
+        app:layout_constraintTop_toTopOf="@+id/arrow" />
+
+    <TextView
+        android:id="@+id/fraAirlineNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Airline Number"
+        app:layout_constraintBottom_toBottomOf="@+id/arrow"
+        app:layout_constraintStart_toEndOf="@+id/fraAirline"
+        app:layout_constraintTop_toTopOf="@+id/arrow" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="75dp"
+        android:layout_height="63dp"
+        app:layout_constraintBottom_toTopOf="@+id/fraArrTime"
+        app:layout_constraintEnd_toEndOf="@+id/fraDepTime"
+        app:layout_constraintStart_toStartOf="@+id/fraDepTime"
+        app:layout_constraintTop_toBottomOf="@+id/fraDepTime"
+        app:srcCompat="@drawable/arrow_down" />
+
+    <TextView
+        android:id="@+id/fraDepTerminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Terminal"
+        app:layout_constraintStart_toStartOf="@+id/fraDepAirport"
+        app:layout_constraintTop_toBottomOf="@+id/fraDepAirport" />
+
+    <TextView
+        android:id="@+id/fraDepGate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Gate"
+        app:layout_constraintBottom_toBottomOf="@+id/fraDepTerminal"
+        app:layout_constraintStart_toEndOf="@+id/fraDepTerminal"
+        app:layout_constraintTop_toTopOf="@+id/fraDepTerminal" />
+
+    <TextView
+        android:id="@+id/fraArrTerminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Terminal"
+        app:layout_constraintStart_toStartOf="@+id/fraArrAirport"
+        app:layout_constraintTop_toBottomOf="@+id/fraArrAirport" />
+
+    <TextView
+        android:id="@+id/fraArrGate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Gate"
+        app:layout_constraintBottom_toBottomOf="@+id/fraArrTerminal"
+        app:layout_constraintStart_toEndOf="@+id/fraArrTerminal"
+        app:layout_constraintTop_toTopOf="@+id/fraArrTerminal" />
+
+    <TextView
+        android:id="@+id/flightDetail"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Flight Detail: "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:background="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/closeButton"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/close" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
