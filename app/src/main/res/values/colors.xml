@@ -5,4 +5,5 @@
     <color name="statusBarColor">#4B4A4A</color>
     <color name="grey">@color/material_dynamic_neutral20</color>
     <color name="grey_light">#8E8888</color>
+
 </resources>

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/airline"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/flightNumber"
-        android:layout_width="40dp"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Flight#"
@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="70dp"
+        android:layout_width="65dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Status"

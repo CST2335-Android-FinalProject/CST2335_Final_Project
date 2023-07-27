@@ -34,7 +34,7 @@ public class FlightResult {
     @ColumnInfo(name="Departure Estimated")
     protected String departureEstimated;
     @ColumnInfo(name="Departure Delay")
-    protected String departureDelay;
+    protected int departureDelay;
     // Arrival:
     @ColumnInfo(name="Arrival Airport_iata")
     protected String arrivalAirport;
@@ -51,7 +51,7 @@ public class FlightResult {
     @ColumnInfo(name="Arrival Estimated")
     protected String arrivalEstimated;
     @ColumnInfo(name="Arrival Delay")
-    protected String arrivalDelay;
+    protected int arrivalDelay;
 
     public FlightResult() {}
 
@@ -151,11 +151,11 @@ public class FlightResult {
         this.departureEstimated = departureEstimated;
     }
 
-    public String getDepartureDelay() {
+    public int getDepartureDelay() {
         return departureDelay;
     }
 
-    public void setDepartureDelay(String departureDelay) {
+    public void setDepartureDelay(int departureDelay) {
         this.departureDelay = departureDelay;
     }
 
@@ -215,11 +215,11 @@ public class FlightResult {
         this.arrivalEstimated = arrivalEstimated;
     }
 
-    public String getArrivalDelay() {
+    public int getArrivalDelay() {
         return arrivalDelay;
     }
 
-    public void setArrivalDelay(String arrivalDelay) {
+    public void setArrivalDelay(int arrivalDelay) {
         this.arrivalDelay = arrivalDelay;
     }
 }

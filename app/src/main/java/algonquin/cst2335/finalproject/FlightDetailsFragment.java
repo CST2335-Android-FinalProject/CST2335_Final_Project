@@ -38,6 +38,12 @@ public class FlightDetailsFragment extends Fragment {
         binding.fraArrTerminal.setText(selected.getArrivalTerminal());
         binding.fraArrGate.setText(selected.getArrivalGate());
 
+        binding.closeButton.setOnClickListener( click -> {
+        });
+
+        binding.addButton.setOnClickListener( click -> {
+        });
+
         return binding.getRoot();
     }
 }
