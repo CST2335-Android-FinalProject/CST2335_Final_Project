@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -38,6 +41,8 @@ public class FlightTracker extends AppCompatActivity {
     FlightDatabase myDB ;
     FlightResultDAO myDAO;
 
+    RequestQueue queue = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,9 @@ public class FlightTracker extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("mySearch", MODE_PRIVATE);
         binding.date.setText(prefs.getString("Date", ""));
         binding.code.setText(prefs.getString("Airport",""));
+
+        //This part goes at the top of the onCreate function:
+        queue = Volley.newRequestQueue(this);
 
         // Access the database:
         myDB = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "MyFlightDB").build();
@@ -119,36 +127,39 @@ public class FlightTracker extends AppCompatActivity {
 
         //Search Button
         binding.searchButton.setOnClickListener( click -> {
-            FlightResult fr = new FlightResult();
 
-            fr.setFlightDate("2023-06-24");
-            fr.setStatus("scheduled");
-            fr.setAirline("Polar Air Cargo");
-            fr.setFlightNumber("PO96");
+            String airportCode = binding.code.getText().toString();
 
-            fr.setDepartureAirport("HKG");
-            fr.setDepartureAirportName("Hong Kong International");
-            fr.setDepartureTimezone("Asia/Hong_Kong");
-            fr.setDepartureTerminal("");
-            fr.setDepartureGate("");
-            fr.setDepartureTime("06:00");
-            fr.setDepartureEstimated("06:00");
-            fr.setDepartureDelay("10");
-
-            fr.setArrivalAirport("LAX");
-            fr.setArrivalAirportName("Los Angeles International");
-            fr.setArrivalTimezone("America/Los_Angeles");
-            fr.setArrivalTerminal("");
-            fr.setArrivalGate("");
-            fr.setArrivalTime("02:58");
-            fr.setArrivalEstimated("02:58");
-            fr.setArrivalDelay("");
-            // insert into ArrayList
-            flightResults.add(fr);
-            // insert into database
-            Executors.newSingleThreadExecutor().execute(() -> {
-                myDAO.insertFlight(fr);
-            });
+//            FlightResult fr = new FlightResult();
+//
+//            fr.setFlightDate("2023-06-24");
+//            fr.setStatus("scheduled");
+//            fr.setAirline("Polar Air Cargo");
+//            fr.setFlightNumber("PO96");
+//
+//            fr.setDepartureAirport("HKG");
+//            fr.setDepartureAirportName("Hong Kong International");
+//            fr.setDepartureTimezone("Asia/Hong_Kong");
+//            fr.setDepartureTerminal("");
+//            fr.setDepartureGate("");
+//            fr.setDepartureTime("06:00");
+//            fr.setDepartureEstimated("06:00");
+//            fr.setDepartureDelay("10");
+//
+//            fr.setArrivalAirport("LAX");
+//            fr.setArrivalAirportName("Los Angeles International");
+//            fr.setArrivalTimezone("America/Los_Angeles");
+//            fr.setArrivalTerminal("");
+//            fr.setArrivalGate("");
+//            fr.setArrivalTime("02:58");
+//            fr.setArrivalEstimated("02:58");
+//            fr.setArrivalDelay("");
+//            // insert into ArrayList
+//            flightResults.add(fr);
+//            // insert into database
+//            Executors.newSingleThreadExecutor().execute(() -> {
+//                myDAO.insertFlight(fr);
+//            });
 
             // notify the adapter:
             myAdapter.notifyDataSetChanged(); //redraw the whole screen
@@ -160,6 +171,12 @@ public class FlightTracker extends AppCompatActivity {
             editor.putString("Date", binding.date.getText().toString());
             editor.putString("Airport", binding.code.getText().toString());
             editor.apply();
+        });
+
+        // Go to Favorite Page:
+        binding.loveButton.setOnClickListener( click -> {
+            Intent flightFavorite = new Intent( this, FlightFavorite.class);
+            startActivity( flightFavorite );
         });
 
     }
@@ -177,34 +194,34 @@ public class FlightTracker extends AppCompatActivity {
 
             itemView.setOnClickListener( click ->{
                 int position = getAbsoluteAdapterPosition();
-//                FlightResult selected = flightResults.get(position);
-//                flightModel.selectedFlight.postValue(selected);
+                FlightResult selected = flightResults.get(position);
+                flightModel.selectedFlight.postValue(selected);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder( FlightTracker.this );
-                builder.setTitle( "Question:" )
-                        .setMessage( "Do you want to delete this flight: " + flightNumber.getText() )
-                        .setPositiveButton( "No" , (dialog, cl) -> {})
-                        .setNegativeButton( "Yes" , (dialog, cl) -> {
-                            FlightResult removeFlight = flightResults.get(position);
-                            // Deletes the chatMessage in the Database and runs in another thread
-                            Executors.newSingleThreadExecutor().execute(() -> {
-                                myDAO.deleteFlight(removeFlight);
-                            });
-                            flightResults.remove(position);
-                            myAdapter.notifyItemRemoved(position);
-                                                                                    //position starts from 0
-                            Snackbar.make( flightNumber, "You deleted message #" + (position + 1), Snackbar.LENGTH_LONG)
-                                    .setAction("Undo", clk -> {
-                                        // Re-inserts the chatMessage into the Database
-                                        Executors.newSingleThreadExecutor().execute(() -> {
-                                            myDAO.insertFlight(removeFlight);
-                                        });
-                                        flightResults.add(position, removeFlight);
-                                        myAdapter.notifyItemInserted(position);
-                                    })
-                                    .show();
-                        })
-                        .create().show(); //actually make the window appear
+//                AlertDialog.Builder builder = new AlertDialog.Builder( FlightTracker.this );
+//                builder.setTitle( "Question:" )
+//                        .setMessage( "Do you want to delete this flight: " + flightNumber.getText() )
+//                        .setPositiveButton( "No" , (dialog, cl) -> {})
+//                        .setNegativeButton( "Yes" , (dialog, cl) -> {
+//                            FlightResult removeFlight = flightResults.get(position);
+//                            // Deletes the chatMessage in the Database and runs in another thread
+//                            Executors.newSingleThreadExecutor().execute(() -> {
+//                                myDAO.deleteFlight(removeFlight);
+//                            });
+//                            flightResults.remove(position);
+//                            myAdapter.notifyItemRemoved(position);
+//                                                                                    //position starts from 0
+//                            Snackbar.make( flightNumber, "You deleted message #" + (position + 1), Snackbar.LENGTH_LONG)
+//                                    .setAction("Undo", clk -> {
+//                                        // Re-inserts the chatMessage into the Database
+//                                        Executors.newSingleThreadExecutor().execute(() -> {
+//                                            myDAO.insertFlight(removeFlight);
+//                                        });
+//                                        flightResults.add(position, removeFlight);
+//                                        myAdapter.notifyItemInserted(position);
+//                                    })
+//                                    .show();
+//                        })
+//                        .create().show(); //actually make the window appear
             });
 
             airline = itemView.findViewById(R.id.airline);
