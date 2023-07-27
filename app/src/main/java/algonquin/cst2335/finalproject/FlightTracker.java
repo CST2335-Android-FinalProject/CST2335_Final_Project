@@ -168,8 +168,9 @@ public class FlightTracker extends AppCompatActivity {
                                 String depAirportCode = departure.getString("iata");
                                 String depTerminal = departure.getString("terminal");
                                 String depGate = departure.getString("gate");
-                                int depDelay = departure.getInt("delay");
+//                                int depDelay = departure.getInt("delay");
                                 String depTime = departure.getString("scheduled");
+                                String depTimeSub = depTime.substring(11,16);
                                 String depEstimated = departure.getString("estimated");
 
                                 JSONObject arrival = flight1.getJSONObject("arrival");
@@ -178,8 +179,9 @@ public class FlightTracker extends AppCompatActivity {
                                 String arrAirportCode = arrival.getString("iata");
                                 String arrTerminal = arrival.getString("terminal");
                                 String arrGate = arrival.getString("gate");
-                                int arrDelay = arrival.getInt("delay");
+//                                int arrDelay = arrival.getInt("delay");
                                 String arrTime = arrival.getString("scheduled");
+                                String arrTimeSub = arrTime.substring(11,16);
                                 String arrEstimated = arrival.getString("estimated");
 
                                 JSONObject airline = flight1.getJSONObject("airline");
@@ -200,24 +202,32 @@ public class FlightTracker extends AppCompatActivity {
                                 fr.setDepartureTimezone(depTimezone);
                                 fr.setDepartureTerminal(depTerminal);
                                 fr.setDepartureGate(depGate);
-                                fr.setDepartureTime(depTime);
+                                fr.setDepartureTime(depTimeSub);
                                 fr.setDepartureEstimated(depEstimated);
-                                fr.setDepartureDelay(depDelay);
+//                                fr.setDepartureDelay(depDelay);
 
                                 fr.setArrivalAirport(arrAirportCode);
                                 fr.setArrivalAirportName(arrAirport);
                                 fr.setArrivalTimezone(arrTimezone);
                                 fr.setArrivalTerminal(arrTerminal);
                                 fr.setArrivalGate(arrGate);
-                                fr.setArrivalTime(arrTime);
+                                fr.setArrivalTime(arrTimeSub);
                                 fr.setArrivalEstimated(arrEstimated);
-                                fr.setArrivalDelay(arrDelay);
+//                                fr.setArrivalDelay(arrDelay);
+
                                 // insert into ArrayList
                                 flightResults.add(fr);
+
+                                // insert into database
+                                Executors.newSingleThreadExecutor().execute(() -> {
+                                    myDAO.insertFlight(fr);
+                                });
+
                                 // notify the adapter:
-                                myAdapter.notifyDataSetChanged(); //redraw the whole screen
-                                Toast.makeText(this, "Your search is successful!", Toast.LENGTH_LONG).show();
+                                myAdapter.notifyItemInserted(flightResults.size()-1); //tells the Adapter which row has to be redrawn
                             }
+//                            myAdapter.notifyDataSetChanged(); //redraw the whole screen
+                            Toast.makeText(this, "Your search is successful!", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
