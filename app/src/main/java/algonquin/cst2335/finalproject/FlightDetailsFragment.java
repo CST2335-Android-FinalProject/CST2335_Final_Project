@@ -8,28 +8,52 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalproject.databinding.FlightDetailBinding;
 
+/**
+ * A fragment to display detailed information about a selected flight result.
+ *
+ * @author Wan-Hsuan Lee
+ * @version 1.0
+ */
 public class FlightDetailsFragment extends Fragment {
 
+    /** The selected FlightResult object containing flight details. */
     FlightResult selected;
+    /** The parent FlightTracker activity for navigation. */
     FlightTracker tracker;
 
+    /**
+     * Constructs a new FlightDetailsFragment with the selected FlightResult and parent activity.
+     *
+     * @param fr The FlightResult object representing the selected flight.
+     * @param ft The parent FlightTracker activity for navigation.
+     */
     public FlightDetailsFragment(FlightResult fr, FlightTracker ft){
         selected = fr;
         tracker = ft;
     }
 
+    /**
+     * Inflates the layout for the fragment and populates it with flight details.
+     * Handles the behavior of buttons for closing the fragment and adding to favorites.
+     *
+     * @param inflater           The LayoutInflater to inflate the layout.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState The saved instance state.
+     * @return The root View of the inflated layout.
+     */
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        // Inflate the layout using view binding
         FlightDetailBinding binding = FlightDetailBinding.inflate(inflater);
 
+        // Populate the UI with flight details
         binding.fraFlightDate.setText(selected.getFlightDate());
         binding.fraDepTime.setText(selected.getDepartureTime());
         binding.fraDepAirport.setText(selected.getDepartureAirportName());
@@ -44,13 +68,14 @@ public class FlightDetailsFragment extends Fragment {
         binding.fraArrTerminal.setText(selected.getArrivalTerminal());
         binding.fraArrGate.setText(selected.getArrivalGate());
 
+        // Set up click listeners for UI elements
         binding.closeButton.setOnClickListener( click -> {
-            // Back to Previous Main Page
+            // Navigate back to the previous main page
             tracker.onBackPressed();
         });
 
         binding.addButton.setOnClickListener( click -> {
-             // insert into database
+            // Insert selected flight into the database
             Executors.newSingleThreadExecutor().execute(() -> {
                 tracker.myDAO.insertFlight(selected);
                 tracker.runOnUiThread( () ->

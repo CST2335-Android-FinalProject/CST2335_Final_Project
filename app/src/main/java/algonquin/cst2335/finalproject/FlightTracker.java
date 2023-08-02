@@ -25,7 +25,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,60 +33,72 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalproject.databinding.ActivityFlightTrackerBinding;
 import algonquin.cst2335.finalproject.databinding.FlightResultBinding;
 
+/**
+ * Represents the Flight Tracker page, where users can track flights and view details.
+ * This class extends AppCompatActivity to provide the UI functionality.
+ * It allows users to search for flights, view search results, and see flight details.
+ *
+ * @author Wan-Hsuan Lee
+ * @version 1.0
+ */
 public class FlightTracker extends AppCompatActivity {
 
+    /** View binding instance for the FlightTracker activity. */
     ActivityFlightTrackerBinding binding;
+    /** ViewModel for managing flight-related data. */
     FlightTrackerViewModel flightModel;
+    /** Adapter for populating the RecyclerView with flight result items. */
     private RecyclerView.Adapter<MyRowHolder> myAdapter;
+    /** List of flight results displayed in the RecyclerView. */
     ArrayList<FlightResult> flightResults;
-
+    /** Database instance for storing flight data. */
     FlightDatabase myDB ;
+    /** Data Access Object for interacting with the flight result table in the database. */
     FlightResultDAO myDAO;
-
+    /** RequestQueue for managing network requests using Volley library. */
     RequestQueue queue = null;
 
+    /**
+     * Called when the activity is first created. Initializes the user interface, sets up
+     * the RecyclerView, handles user interactions, and manages flight tracking functionality.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down, then this Bundle contains the data it most
+     *                           recently supplied in onSaveInstanceState(Bundle). Otherwise,
+     *                           it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Inflate the layout using view binding
         binding = ActivityFlightTrackerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Sets history search
+        // Sets history search from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("mySearch", MODE_PRIVATE);
         binding.date.setText(prefs.getString("Date", ""));
         binding.code.setText(prefs.getString("Airport",""));
 
-        // adds your toolbar
+        // Set up the toolbar
         setSupportActionBar(binding.toolbar);
 
-        //This part goes at the top of the onCreate function:
+        // Initialize Volley RequestQueue for network requests
         queue = Volley.newRequestQueue(this);
 
-        // Access the database:
+        // Initialize the local database and DAO to Access the database:
         myDB = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "MyFlightDB").build();
         myDAO = myDB.frDAO(); //the only function in MessageDatabase;
 
-        // FlightTracker View Model
+        // Initialize FlightTracker View Model
         flightModel = new ViewModelProvider(this).get(FlightTrackerViewModel.class);
         flightResults = flightModel.getFlights().getValue();
         if (flightResults == null){
             flightModel.getFlights().postValue( flightResults = new ArrayList<>() );
-//            Executor thread = Executors.newSingleThreadExecutor();
-//            thread.execute( () -> {
-//                List<FlightResult> fromDatabase = myDAO.getAllFlightResults();
-//                //Once you get the data from database
-//                flightResults.addAll(fromDatabase);
-//                //You can then load the RecyclerView (must be done on the main UI thread)
-//                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter ));
-//            });
         }
 
         //register as a listener to the MutableLiveData object
@@ -110,6 +121,7 @@ public class FlightTracker extends AppCompatActivity {
             }
         });
 
+        // Set up RecyclerView and adapter
         binding.recycleView.setAdapter( myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
@@ -135,7 +147,8 @@ public class FlightTracker extends AppCompatActivity {
                 return flightResults.size();
             }
         });
-        // Sets LayoutManager
+
+        // Sets LayoutManager for RecyclerView
         binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
 
         //Search Button
@@ -150,6 +163,7 @@ public class FlightTracker extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
+            // Perform network request using Volley
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                     (successfulResponse) -> {
                         boolean success = true;
@@ -218,15 +232,11 @@ public class FlightTracker extends AppCompatActivity {
                                 // insert into ArrayList
                                 flightResults.add(fr);
 
-//                                // insert into database
-//                                Executors.newSingleThreadExecutor().execute(() -> {
-//                                    myDAO.insertFlight(fr);
-//                                });
-
-                                // notify the adapter:
-                                myAdapter.notifyItemInserted(flightResults.size()-1); //tells the Adapter which row has to be redrawn
+                                // notify the adapter: tells the Adapter which row has to be redrawn
+                                myAdapter.notifyItemInserted(flightResults.size()-1);
                             }
-//                            myAdapter.notifyDataSetChanged(); //redraw the whole screen
+//                            // notify the adapter: redraw the whole screen
+//                            myAdapter.notifyDataSetChanged();
                             Toast.makeText(this, "Your search is successful!", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -237,41 +247,6 @@ public class FlightTracker extends AppCompatActivity {
                     });//gets called if there is an error
             queue.add(request);//run the web query
 
-//            FlightResult fr = new FlightResult();
-//
-//            fr.setFlightDate("2023-06-24");
-//            fr.setStatus("scheduled");
-//            fr.setAirline("Polar Air Cargo");
-//            fr.setFlightNumber("PO96");
-//
-//            fr.setDepartureAirport("HKG");
-//            fr.setDepartureAirportName("Hong Kong International");
-//            fr.setDepartureTimezone("Asia/Hong_Kong");
-//            fr.setDepartureTerminal("");
-//            fr.setDepartureGate("");
-//            fr.setDepartureTime("06:00");
-//            fr.setDepartureEstimated("06:00");
-//            fr.setDepartureDelay(10);
-//
-//            fr.setArrivalAirport("LAX");
-//            fr.setArrivalAirportName("Los Angeles International");
-//            fr.setArrivalTimezone("America/Los_Angeles");
-//            fr.setArrivalTerminal("");
-//            fr.setArrivalGate("");
-//            fr.setArrivalTime("02:58");
-//            fr.setArrivalEstimated("02:58");
-//            fr.setArrivalDelay(0);
-//            // insert into ArrayList
-//            flightResults.add(fr);
-//            // insert into database
-//            Executors.newSingleThreadExecutor().execute(() -> {
-//                myDAO.insertFlight(fr);
-//            });
-//            // notify the adapter:
-//            myAdapter.notifyDataSetChanged(); //redraw the whole screen
-////            myAdapter.notifyItemInserted(flightResults.size()-1); //tells the Adapter which row has to be redrawn
-//            Toast.makeText(this, "Your search is successful!", Toast.LENGTH_LONG).show();
-
             // Saves the search history into Shared Preferences
             SharedPreferences.Editor editor = getSharedPreferences("mySearch", Context.MODE_PRIVATE).edit();
             editor.putString("Date", binding.date.getText().toString());
@@ -280,49 +255,41 @@ public class FlightTracker extends AppCompatActivity {
         });
     }
 
+    /**
+     * Represents a custom ViewHolder for RecyclerView items in the flight result list.
+     * This ViewHolder is responsible for displaying flight information in each row of the list.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
 
+        /** TextView displaying the airline name. */
         TextView airline;
+        /** TextView displaying the flight number. */
         TextView flightNumber;
+        /** TextView displaying the arrival airport code. */
         TextView arrivalAirport;
+        /** TextView displaying the flight status. */
         TextView status;
+        /** TextView displaying the departure time. */
         TextView departureTime;
+        /** TextView displaying the arrival time. */
         TextView arrivalTime;
+
+        /**
+         * Constructs a new MyRowHolder instance.
+         *
+         * @param itemView The view representing a single item in the RecyclerView.
+         */
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
 
+            // Set up click listener for selecting a flight result
             itemView.setOnClickListener( click ->{
                 int position = getAbsoluteAdapterPosition();
                 FlightResult selected = flightResults.get(position);
                 flightModel.selectedFlight.postValue(selected);
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder( FlightTracker.this );
-//                builder.setTitle( "Question:" )
-//                        .setMessage( "Do you want to delete this flight: " + flightNumber.getText() )
-//                        .setPositiveButton( "No" , (dialog, cl) -> {})
-//                        .setNegativeButton( "Yes" , (dialog, cl) -> {
-//                            FlightResult removeFlight = flightResults.get(position);
-//                            // Deletes the chatMessage in the Database and runs in another thread
-//                            Executors.newSingleThreadExecutor().execute(() -> {
-//                                myDAO.deleteFlight(removeFlight);
-//                            });
-//                            flightResults.remove(position);
-//                            myAdapter.notifyItemRemoved(position);
-//                                                                                    //position starts from 0
-//                            Snackbar.make( flightNumber, "You deleted message #" + (position + 1), Snackbar.LENGTH_LONG)
-//                                    .setAction("Undo", clk -> {
-//                                        // Re-inserts the chatMessage into the Database
-//                                        Executors.newSingleThreadExecutor().execute(() -> {
-//                                            myDAO.insertFlight(removeFlight);
-//                                        });
-//                                        flightResults.add(position, removeFlight);
-//                                        myAdapter.notifyItemInserted(position);
-//                                    })
-//                                    .show();
-//                        })
-//                        .create().show(); //actually make the window appear
             });
 
+            // Initialize TextViews for flight information
             airline = itemView.findViewById(R.id.airline);
             flightNumber = itemView.findViewById(R.id.flightNumber);
             arrivalAirport = itemView.findViewById(R.id.arrivalAirport);
@@ -332,6 +299,12 @@ public class FlightTracker extends AppCompatActivity {
         }
     }
 
+    /**
+     * Initialize the options menu for the FlightTracker activity.
+     *
+     * @param menu The options menu in which items are placed.
+     * @return True if the options menu is successfully initialized.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -339,10 +312,17 @@ public class FlightTracker extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handle options menu item selection.
+     *
+     * @param item The menu item that was selected.
+     * @return True if the item selection was handled successfully.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.item_about) {
+            // Show an instructional dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(FlightTracker.this);
             builder.setTitle("Instruction:")
                     .setMessage("Step 1: Enter your departure date and airport code, you can search the flights.\n\n"
@@ -352,7 +332,7 @@ public class FlightTracker extends AppCompatActivity {
                     })
                     .create().show(); //actually make the window appear
         } else if (item.getItemId() == R.id.item_myFavorite) {
-            // Go to Favorite Page:
+            // Open the Favorite Page activity
             Intent flightFavorite = new Intent( this, FlightFavorites.class);
             startActivity( flightFavorite );
         }
