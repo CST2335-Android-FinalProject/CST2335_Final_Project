@@ -13,6 +13,7 @@
 
     <string name="titleFavorite">Flight Favorite Lists</string>
     <string name="addButton">Add to Favorite Lists</string>
+    <string name="removeButton">Remove from Favorite Lists</string>
 
     <string name="about">About</string>
     <string name="myFavortie">Favortie</string>

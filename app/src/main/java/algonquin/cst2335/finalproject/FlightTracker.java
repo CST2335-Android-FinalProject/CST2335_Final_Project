@@ -80,14 +80,14 @@ public class FlightTracker extends AppCompatActivity {
         flightResults = flightModel.getFlights().getValue();
         if (flightResults == null){
             flightModel.getFlights().postValue( flightResults = new ArrayList<>() );
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute( () -> {
-                List<FlightResult> fromDatabase = myDAO.getAllFlightResults();
-                //Once you get the data from database
-                flightResults.addAll(fromDatabase);
-                //You can then load the RecyclerView (must be done on the main UI thread)
-                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter ));
-            });
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute( () -> {
+//                List<FlightResult> fromDatabase = myDAO.getAllFlightResults();
+//                //Once you get the data from database
+//                flightResults.addAll(fromDatabase);
+//                //You can then load the RecyclerView (must be done on the main UI thread)
+//                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter ));
+//            });
         }
 
         //register as a listener to the MutableLiveData object
@@ -98,7 +98,7 @@ public class FlightTracker extends AppCompatActivity {
                 FragmentManager fMgr = getSupportFragmentManager();
                 FragmentTransaction tx = fMgr.beginTransaction();
                 //What to show:
-                FlightDetailsFragment flightFragment = new FlightDetailsFragment(selectedFlight);
+                FlightDetailsFragment flightFragment = new FlightDetailsFragment(selectedFlight, this);
                 //Where to load:
                 // This line actually loads the fragment into the specified FrameLayout
                 tx.replace(R.id.fragmentLocation, flightFragment);
@@ -218,10 +218,10 @@ public class FlightTracker extends AppCompatActivity {
                                 // insert into ArrayList
                                 flightResults.add(fr);
 
-                                // insert into database
-                                Executors.newSingleThreadExecutor().execute(() -> {
-                                    myDAO.insertFlight(fr);
-                                });
+//                                // insert into database
+//                                Executors.newSingleThreadExecutor().execute(() -> {
+//                                    myDAO.insertFlight(fr);
+//                                });
 
                                 // notify the adapter:
                                 myAdapter.notifyItemInserted(flightResults.size()-1); //tells the Adapter which row has to be redrawn

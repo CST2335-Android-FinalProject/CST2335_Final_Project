@@ -4,19 +4,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalproject.databinding.FlightDetailBinding;
 
 public class FlightDetailsFragment extends Fragment {
 
     FlightResult selected;
+    FlightTracker tracker;
 
-    public FlightDetailsFragment(FlightResult fr){
+    public FlightDetailsFragment(FlightResult fr, FlightTracker ft){
         selected = fr;
+        tracker = ft;
     }
 
     @Override
@@ -25,6 +30,7 @@ public class FlightDetailsFragment extends Fragment {
 
         FlightDetailBinding binding = FlightDetailBinding.inflate(inflater);
 
+        binding.fraFlightDate.setText(selected.getFlightDate());
         binding.fraDepTime.setText(selected.getDepartureTime());
         binding.fraDepAirport.setText(selected.getDepartureAirportName());
         binding.fraDepAirportNum.setText(selected.getDepartureAirport());
@@ -39,11 +45,21 @@ public class FlightDetailsFragment extends Fragment {
         binding.fraArrGate.setText(selected.getArrivalGate());
 
         binding.closeButton.setOnClickListener( click -> {
+            // Back to Previous Main Page
+            tracker.onBackPressed();
         });
 
         binding.addButton.setOnClickListener( click -> {
+             // insert into database
+            Executors.newSingleThreadExecutor().execute(() -> {
+                tracker.myDAO.insertFlight(selected);
+                tracker.runOnUiThread( () ->
+                    Toast.makeText(tracker, "Added successfully!", Toast.LENGTH_LONG).show()
+                );
+            });
         });
 
         return binding.getRoot();
     }
+
 }

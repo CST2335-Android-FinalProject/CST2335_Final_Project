@@ -9,8 +9,14 @@ public class FlightTrackerViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<FlightResult>> flightResults = new MutableLiveData< >();
     public MutableLiveData<FlightResult> selectedFlight = new MutableLiveData< >();
+
+    public MutableLiveData<ArrayList<FlightResult>> favoriteResults = new MutableLiveData< >();
+    public MutableLiveData<FlightResult> selectedFavorite = new MutableLiveData< >();
     public MutableLiveData<ArrayList<FlightResult>> getFlights() {
         return flightResults;
     }
+    public MutableLiveData<ArrayList<FlightResult>> getFavorites() { return favoriteResults; }
+
+
 
 }
