@@ -7,7 +7,7 @@
     android:background="@color/white" >
 
     <TextView
-        android:id="@+id/detailFlightDetail"
+        android:id="@+id/favoriteFlightDetail"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/detailDepartureDate"
+        android:id="@+id/favoriteDepartureDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,20 +31,20 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailFlightDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/favoriteFlightDetail" />
 
     <TextView
-        android:id="@+id/fraFlightDate"
+        android:id="@+id/favFlightDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Departure Date"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/detailDepartureDate"
-        app:layout_constraintStart_toEndOf="@+id/detailDepartureDate"
-        app:layout_constraintTop_toTopOf="@+id/detailDepartureDate" />
+        app:layout_constraintBottom_toBottomOf="@+id/favoriteDepartureDate"
+        app:layout_constraintStart_toEndOf="@+id/favoriteDepartureDate"
+        app:layout_constraintTop_toTopOf="@+id/favoriteDepartureDate" />
 
     <TextView
-        android:id="@+id/fraDepTime"
+        android:id="@+id/favDepTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -53,61 +53,61 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailDepartureDate" />
+        app:layout_constraintTop_toBottomOf="@+id/favoriteDepartureDate" />
 
     <TextView
-        android:id="@+id/fraArrTime"
+        android:id="@+id/favArrTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:text="Arrival Time"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/fraDepTime"
-        app:layout_constraintStart_toStartOf="@+id/fraDepTime"
-        app:layout_constraintTop_toBottomOf="@+id/fraDepTime" />
+        app:layout_constraintEnd_toEndOf="@+id/favDepTime"
+        app:layout_constraintStart_toStartOf="@+id/favDepTime"
+        app:layout_constraintTop_toBottomOf="@+id/favDepTime" />
 
     <TextView
-        android:id="@+id/fraDepAirport"
+        android:id="@+id/favDepAirport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Departure Airport"
-        app:layout_constraintBottom_toBottomOf="@+id/fraDepTime"
-        app:layout_constraintStart_toEndOf="@+id/fraDepTime"
-        app:layout_constraintTop_toTopOf="@+id/fraDepTime" />
+        app:layout_constraintBottom_toBottomOf="@+id/favDepTime"
+        app:layout_constraintStart_toEndOf="@+id/favDepTime"
+        app:layout_constraintTop_toTopOf="@+id/favDepTime" />
 
     <TextView
-        android:id="@+id/fraArrAirport"
+        android:id="@+id/favArrAirport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Arrival Airport"
-        app:layout_constraintBottom_toBottomOf="@+id/fraArrTime"
-        app:layout_constraintStart_toStartOf="@+id/fraDepAirport"
-        app:layout_constraintTop_toTopOf="@+id/fraArrTime" />
+        app:layout_constraintBottom_toBottomOf="@+id/favArrTime"
+        app:layout_constraintStart_toStartOf="@+id/favDepAirport"
+        app:layout_constraintTop_toTopOf="@+id/favArrTime" />
 
     <TextView
-        android:id="@+id/fraDepAirportNum"
+        android:id="@+id/favDepAirportNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Airport Number"
-        app:layout_constraintBottom_toBottomOf="@+id/fraDepAirport"
-        app:layout_constraintStart_toEndOf="@+id/fraDepAirport"
-        app:layout_constraintTop_toTopOf="@+id/fraDepAirport" />
+        app:layout_constraintBottom_toBottomOf="@+id/favDepAirport"
+        app:layout_constraintStart_toEndOf="@+id/favDepAirport"
+        app:layout_constraintTop_toTopOf="@+id/favDepAirport" />
 
     <TextView
-        android:id="@+id/fraArrAirportNum"
+        android:id="@+id/favArrAirportNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Airport Number"
-        app:layout_constraintBottom_toBottomOf="@+id/fraArrAirport"
-        app:layout_constraintStart_toEndOf="@+id/fraArrAirport"
-        app:layout_constraintTop_toTopOf="@+id/fraArrAirport" />
+        app:layout_constraintBottom_toBottomOf="@+id/favArrAirport"
+        app:layout_constraintStart_toEndOf="@+id/favArrAirport"
+        app:layout_constraintTop_toTopOf="@+id/favArrAirport" />
 
     <TextView
-        android:id="@+id/fraAirline"
+        android:id="@+id/favAirline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Airline"
@@ -117,14 +117,14 @@
         app:layout_constraintTop_toTopOf="@+id/arrow" />
 
     <TextView
-        android:id="@+id/fraAirlineNum"
+        android:id="@+id/favAirlineNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Airline Number"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/arrow"
-        app:layout_constraintStart_toEndOf="@+id/fraAirline"
+        app:layout_constraintStart_toEndOf="@+id/favAirline"
         app:layout_constraintTop_toTopOf="@+id/arrow" />
 
     <ImageView
@@ -132,10 +132,10 @@
         android:layout_width="75dp"
         android:layout_height="63dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/fraArrTime"
-        app:layout_constraintEnd_toEndOf="@+id/fraDepTime"
-        app:layout_constraintStart_toStartOf="@+id/fraDepTime"
-        app:layout_constraintTop_toBottomOf="@+id/fraDepTime"
+        app:layout_constraintBottom_toTopOf="@+id/favArrTime"
+        app:layout_constraintEnd_toEndOf="@+id/favDepTime"
+        app:layout_constraintStart_toStartOf="@+id/favDepTime"
+        app:layout_constraintTop_toBottomOf="@+id/favDepTime"
         app:srcCompat="@drawable/arrow_down" />
 
     <TextView
@@ -144,11 +144,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Terminal: "
-        app:layout_constraintStart_toStartOf="@+id/fraDepAirport"
-        app:layout_constraintTop_toBottomOf="@+id/fraDepAirport" />
+        app:layout_constraintStart_toStartOf="@+id/favDepAirport"
+        app:layout_constraintTop_toBottomOf="@+id/favDepAirport" />
 
     <TextView
-        android:id="@+id/fraDepTerminal"
+        android:id="@+id/favDepTerminal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="T_data"
@@ -162,12 +162,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="Gate: "
-        app:layout_constraintBottom_toBottomOf="@+id/fraDepTerminal"
-        app:layout_constraintStart_toEndOf="@+id/fraDepTerminal"
-        app:layout_constraintTop_toTopOf="@+id/fraDepTerminal" />
+        app:layout_constraintBottom_toBottomOf="@+id/favDepTerminal"
+        app:layout_constraintStart_toEndOf="@+id/favDepTerminal"
+        app:layout_constraintTop_toTopOf="@+id/favDepTerminal" />
 
     <TextView
-        android:id="@+id/fraDepGate"
+        android:id="@+id/favDepGate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="G_data"
@@ -181,11 +181,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Terminal: "
-        app:layout_constraintStart_toStartOf="@+id/fraArrAirport"
-        app:layout_constraintTop_toBottomOf="@+id/fraArrAirport" />
+        app:layout_constraintStart_toStartOf="@+id/favArrAirport"
+        app:layout_constraintTop_toBottomOf="@+id/favArrAirport" />
 
     <TextView
-        android:id="@+id/fraArrTerminal"
+        android:id="@+id/favArrTerminal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="T_data"
@@ -200,12 +200,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="Gate: "
-        app:layout_constraintBottom_toBottomOf="@+id/fraArrTerminal"
-        app:layout_constraintStart_toEndOf="@+id/fraArrTerminal"
-        app:layout_constraintTop_toTopOf="@+id/fraArrTerminal" />
+        app:layout_constraintBottom_toBottomOf="@+id/favArrTerminal"
+        app:layout_constraintStart_toEndOf="@+id/favArrTerminal"
+        app:layout_constraintTop_toTopOf="@+id/favArrTerminal" />
 
     <TextView
-        android:id="@+id/fraArrGate"
+        android:id="@+id/favArrGate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="G_data"
@@ -227,14 +227,14 @@
         app:srcCompat="@drawable/close" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/removeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/addButton"
+        android:text="@string/removeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fraArrTerminal" />
+        app:layout_constraintTop_toBottomOf="@+id/favArrTerminal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

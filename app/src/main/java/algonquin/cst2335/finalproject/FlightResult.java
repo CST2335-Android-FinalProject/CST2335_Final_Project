@@ -4,21 +4,33 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Represents a flight result entity containing information about a specific flight.
+ *
+ * @author Wan-Hsuan Lee
+ * @version 1.0
+ */
 @Entity
 public class FlightResult {
 
+    /** The auto-generated primary key ID for the flight result. */
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="ID")
     public long id;
+    /** The flight date of the flight result. */
     @ColumnInfo(name="Flight Date")
     protected String flightDate;
+    /** The status of the flight result. */
     @ColumnInfo(name="Flight Status")
     protected String status;
+    /** The airline of the flight result. */
     @ColumnInfo(name="Airline")
     protected String airline;
+    /** The flight number (IATA code) of the flight result. */
     @ColumnInfo(name="Flight Number_iata")
     protected String flightNumber;
-    // Departure:
+
+    // Departure information:
     @ColumnInfo(name="Departure Airport_iata")
     protected String departureAirport;
     @ColumnInfo(name="Departure Airport")
@@ -35,7 +47,8 @@ public class FlightResult {
     protected String departureEstimated;
     @ColumnInfo(name="Departure Delay")
     protected int departureDelay;
-    // Arrival:
+
+    // Arrival information:
     @ColumnInfo(name="Arrival Airport_iata")
     protected String arrivalAirport;
     @ColumnInfo(name="Arrival Airport")
@@ -53,8 +66,10 @@ public class FlightResult {
     @ColumnInfo(name="Arrival Delay")
     protected int arrivalDelay;
 
+    /** Default constructor for creating a FlightResult instance. */
     public FlightResult() {}
 
+    /** Getters and setters for the FlightResult fields. */
     public long getId() {
         return id;
     }

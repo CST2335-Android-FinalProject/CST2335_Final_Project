@@ -13,6 +13,8 @@
     <string name="arrTime">抵達</string>
     <string name="titleFavorite">航班最愛清單</string>
     <string name="addButton">加入最愛清單</string>
+    <string name="removeButton">取消最愛清單</string>
     <string name="about">關於</string>
     <string name="myFavortie">最愛</string>
+
 </resources>

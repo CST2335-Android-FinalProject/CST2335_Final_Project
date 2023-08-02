@@ -33,6 +33,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/titleFavorite"
+        app:layout_constraintEnd_toStartOf="@+id/titleFavorite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/titleFavorite"
+        app:srcCompat="@drawable/back" />
+
     <TextView
         android:id="@+id/favAirline"
         android:layout_width="110dp"
@@ -111,5 +123,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/favAirline"
         app:layout_constraintStart_toEndOf="@+id/favDepartureTime"
         app:layout_constraintTop_toTopOf="@+id/favAirline" />
+
+    <FrameLayout
+        android:id="@+id/fraFavoriteLocation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recycleView"
+        app:layout_constraintTop_toTopOf="@+id/recycleView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
