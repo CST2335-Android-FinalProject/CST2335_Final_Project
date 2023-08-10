@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import algonquin.cst2335.finalproject.Activities.TriviaActivity;
 import algonquin.cst2335.finalproject.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
 //            Intent currencyConverter = new Intent( MainActivity.this, CurrencyConverter.class);
 //            startActivity( currencyConverter );
 //        });
-//
-//        binding.question.setOnClickListener( clckk-> {
-//            Intent triviaQuestion = new Intent( MainActivity.this, TriviaQuestion.class);
-//            startActivity( triviaQuestion );
-//        });
+
+        binding.question.setOnClickListener( clckk-> {
+            Intent triviaQuestion = new Intent( MainActivity.this, TriviaActivity.class);
+            startActivity( triviaQuestion );
+        });
 
         binding.bear.setOnClickListener( clckk-> {
             Intent imageGenerator = new Intent( MainActivity.this, ImageGenerator.class);

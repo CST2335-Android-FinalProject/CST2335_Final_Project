@@ -64,7 +64,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/flight"
         app:layout_constraintTop_toBottomOf="@+id/flight"
-        app:srcCompat="@drawable/question" />
+        app:srcCompat="@drawable/main_question" />
 
     <ImageButton
         android:id="@+id/bear"
