@@ -100,6 +100,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
                         });
                         userScores.remove(position);
                         userAdapter.notifyItemRemoved(position);
+                        //added a log
                         Log.d("LeaderboardAdapter", "showDeleteDialog: Score removed");
                     })
                     .create()
