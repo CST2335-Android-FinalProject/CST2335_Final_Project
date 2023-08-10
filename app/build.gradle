@@ -16,6 +16,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    buildFeatures {
+        viewBinding true;
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,8 +36,23 @@ android {
 
 dependencies {
 
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation platform('com.google.firebase:firebase-bom:32.2.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database:20.2.2'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation ("com.google.firebase:firebase-storage")
+
+    implementation 'com.android.volley:volley:1.2.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    implementation 'com.github.clans:fab:1.6.4'
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

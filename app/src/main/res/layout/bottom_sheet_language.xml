@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="195dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="26dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_gravity="center"
+        android:background="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Language"
+        android:layout_gravity="center"
+        android:textSize="23.40dp"/>
+
+    <Button
+        android:id="@+id/btnEnglishUK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10.40dp"
+        android:text="English (UK)" />
+
+    <Button
+        android:id="@+id/btnEnglishUSA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10.40dp"
+        android:text="English (USA)" />
+
+</LinearLayout>

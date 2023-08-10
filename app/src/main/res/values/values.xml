@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">141479557844-7ui4cf424n860hhmhh994esv51t34jbp.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">141479557844</string>
+    <string name="google_api_key" translatable="false">AIzaSyCMuh306eGWSXdUqIydPBUqMyuynF1XfaI</string>
+    <string name="google_app_id" translatable="false">1:141479557844:android:55b5c4668757d962d95941</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCMuh306eGWSXdUqIydPBUqMyuynF1XfaI</string>
+    <string name="google_storage_bucket" translatable="false">imagegenerator-61944.appspot.com</string>
+    <string name="project_id" translatable="false">imagegenerator-61944</string>
+</resources>
