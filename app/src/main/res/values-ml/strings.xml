@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final Project</string>
+    <string name="edit_text_hint">Chodiyam itteku</string>
+    <string name="music">sangeetham</string>
+    <string name="geography">bhoomi</string>
+    <string name="submit_button_label">arpikkum</string>
+    <string name="name_of_player">purushothaman</string>
+    <string name="total_score">arilla</string>
+</resources>

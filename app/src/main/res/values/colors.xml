@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="backg">#6a5be2</color>
+    <color name="category">#e8e4fa</color>
+    <color name="click">#e8e4fa</color>
+    <color name="optionNormal">#3F5185</color>
+    <color name="optionPressed">#57648F</color>
+    <color name="optionFocused">#8999B6</color>
+    <color name="optionSelected">#9BB0C9</color>
+    <color name="correctAnswer">#4CAF50</color>
+    <color name="wrongAnswer">#F44336</color>
 </resources>

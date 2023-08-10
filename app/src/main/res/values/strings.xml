@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Final Project</string>
+
+
+
+
+        <!-- EditText hint -->
+         <string name="edit_text_hint">Enter the number of questions</string>
+        <!-- Button labels -->
+        <string name="music">Music</string>
+        <string name="geography">Geography</string>
+         <string name="submit_button_label">Submit</string>
+         <string name="name_of_player">Player Name</string>
+        <string name="total_score">Score</string>
+
+
+
 </resources>
