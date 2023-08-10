@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 //            Intent triviaQuestion = new Intent( MainActivity.this, TriviaQuestion.class);
 //            startActivity( triviaQuestion );
 //        });
-//
-//        binding.bear.setOnClickListener( clckk-> {
-//            Intent imageGenerator = new Intent( MainActivity.this, ImageGenerator.class);
-//            startActivity( imageGenerator );
-//        });
+
+        binding.bear.setOnClickListener( clckk-> {
+            Intent imageGenerator = new Intent( MainActivity.this, ImageGenerator.class);
+            startActivity( imageGenerator );
+       });
     }
 }
