@@ -26,6 +26,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.LeaderboardActivity" />
+        <activity
+            android:name=".Activities.QuestionsActivity"
+            android:label="Questions Activity">
+        </activity>
+        <activity
+            android:name=".Activities.TriviaActivity"
+            android:exported="false" >
+        </activity>
         <activity android:name=".FlightTracker" />
         <activity
             android:name=".FlightFavorites"
@@ -36,6 +45,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 
 </manifest>
